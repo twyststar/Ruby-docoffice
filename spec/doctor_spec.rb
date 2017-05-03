@@ -8,7 +8,13 @@ describe(Doctor) do
       expect(test_doc.name()).to(eq('Hyde'))
     end
   end
-
+  describe ("#id") do
+    it ("sets its id when saved") do
+      doctor= Doctor.new({:name => 'Hyde', :id => nil, :specialty_id => 1})
+      doctor.save()
+      expect(doctor.id()).to(be_an_instance_of(Fixnum))
+    end
+  end
   describe("#save")do
     it('adds a specialty') do
       test_specialty = Specialty.new({:name => 'Cardiology', :id => nil})

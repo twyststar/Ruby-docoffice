@@ -1,20 +1,23 @@
-<div class="col-xs-6">
 
-  <h1><%= @specialty.name %></h1>
+<div class="col-xs-6">
+  <h1> <%= @specialty.name %></h1>
 
   <div class="col-xs-6">
     <% if @doctors.any?() %>
-    <h3>Here are our specialties:</h3>
+    <h3>Here are the doctors in this specialty:</h3>
 
     <ul>
       <% @doctors.each() do |doctor| %>
-        <li><a href="/one_specialty/<%= doctor.id()%>"><%= doctors.name() %></a> </li>
+      <% if doctor.specialty_id() == @specialty.id %>
+        <li><a href="/one_doctor/<%= doctor.id()%>"><%= doctor.name() %></a> </li>
+
+        <% end %>
       <% end %>
     </ul>
 
   <% else %>
 
-      <p>There are no specialties yet!</p>
+      <p>There are no doctors assigned to this specialty yet!</p>
 
   <% end %>
 
@@ -25,8 +28,8 @@
   <div class="form-group">
     <label class='form-label' for="doctor">Assign a doctor to this specialty:</label>
     <input class='form-control' id='doctor' type="text" name="doctor" placeholder="Doctor Name" autofocus>
-
-    <button type="submit" class="button btn">Add Patient</button>
+    <input id="specialty_id" name="specialty_id" type="hidden" value="<%= @specialty.id() %>">
+    <button type="submit" class="button btn">Add Doctor</button>
   </div>
 </form>
 </div>

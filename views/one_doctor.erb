@@ -1,0 +1,36 @@
+<div class="col-xs-6">
+
+  <h1><%= @doctor.name %></h1>
+
+  <div class="col-xs-6">
+    <% if @patients.any?() %>
+    <h3>Here are the patients seeing this doctor:</h3>
+
+    <ul>
+      <% @patients.each() do |patient| %>
+      <% if patient.doctor_id() == @doctor.id %>
+        <li><a href="/patient_info/<%= patient.id()%>"><%= patient.last_name() %></a> </li>
+        <% end %>
+      <% end %>
+    </ul>
+
+  <% else %>
+
+      <p>There are no patients assigned to this doctor yet!</p>
+
+  <% end %>
+
+
+</div>
+<div class="col-xs-6">
+  <form action="/one_doctor" method="post">
+  <div class="form-group">
+    <label class='form-label' for="patient">Assign a patient to this doctor:</label>
+    <input class='form-control' id='first_name' type="text" name="first_name" placeholder="First Name" autofocus>
+    <input class='form-control' id='last_name' type="text" name="last_name" placeholder="Last Name" autofocus>
+    <input class='form-control' id='dob' type="date" name="dob" placeholder="dob" autofocus>
+    <input id="doctor_id" name="doctor_id" type="hidden" value="<%= @doctor.id() %>">
+    <button type="submit" class="button btn">Add Patient</button>
+  </div>
+</form>
+</div>
