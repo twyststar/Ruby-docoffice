@@ -23,22 +23,22 @@ class Specialty
   end
 
   def == (another_specialty)
-    self.name() == another_specialty.name()
+    self.name().==(another_specialty.name()).&(self.id().==(another_specialty.id()))
   end
 
   def self.find (id)
     found_specialty = nil
     Specialty.all().each() do |specialty|
-      if specialty.id() == id
+      if specialty.id().==(id)
        found_specialty = specialty
       end
     end
     found_specialty
   end
 
-  define_method(:doctors) do
+  def doctors
       specialty_doctors = []
-      docs = DB.exec("SELECT * FROM doctors WHERE specialty_id = #{self.id()};")
+      doctors = DB.exec("SELECT * FROM doctors WHERE specialty_id = #{self.id()};")
       doctors.each() do |doc|
         description = doc.fetch("name")
         specialty_id = doc.fetch("specialty_id").to_i()

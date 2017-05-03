@@ -2,6 +2,7 @@ require("sinatra")
 require("sinatra/reloader")
 also_reload("lib/**/*.rb")
 require('./lib/specialty')
+require('./lib/doctor')
 require('pg')
 DB = PG.connect({:dbname => 'office'})
 
@@ -19,6 +20,6 @@ post("/index") do
  end
 
  get('/one_specialty/:id') do
-  @specialty = Specialty.find(params[:id].to_i())
+  @doctors = Specialty.find(params[:id].to_i())
   erb(:one_specialty)
 end
