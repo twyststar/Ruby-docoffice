@@ -1,0 +1,28 @@
+
+
+<div class="col-xs-6">
+  <% if @specialtys.any?() %>
+  <h3>Here are our specialties:</h3>
+
+  <ul>
+    <% @specialtys.each() do |specialty| %>
+      <li><a href="/one_specialty/<%= specialty.id()%>"><%= specialty.name() %></a> </li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+    <p>There are no specialties yet!</p>
+
+<% end %>
+
+</div>
+<div class="col-xs-6">
+  <form action="/index" method="post">
+  <div class="form-group">
+    <label class='form-label' for="name">Assign a name to your specialty:</label>
+    <input class='form-control' id='name' type="text" name="name" placeholder="Specialty" autofocus>
+    <button type="submit" class="button btn">Add List</button>
+  </div>
+</form>
+</div>
